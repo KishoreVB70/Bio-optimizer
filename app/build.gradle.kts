@@ -11,6 +11,8 @@ chaquopy {
             install("numpy")
             install("geneticalgorithm")
             install("tflite-runtime")
+            install("matplotlib")
+
         }
     }
 }
