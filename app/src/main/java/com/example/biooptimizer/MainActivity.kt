@@ -87,8 +87,8 @@ class MainActivity : AppCompatActivity() {
             var glu  = resultFromPython[1]
             var mg = resultFromPython[2]
             var na = resultFromPython[3]
-            var yield = "50"
-            var resultValue = resultFromPython[4]
+            var yield = resultFromPython[4]
+            var resultValue = resultFromPython[5]
 
             intent.putExtra("yield", yield)
             intent.putExtra("time", time)
