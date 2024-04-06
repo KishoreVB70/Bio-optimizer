@@ -10,14 +10,14 @@ input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
 
 def runGA(obj, bound):
-    algorithm_param = {'max_num_iteration': 10, \
+    algorithm_param = {'max_num_iteration': 20, \
                        'population_size':100, \
                        'mutation_probability':0.01, \
                        'elit_ratio': 0.01, \
                        'crossover_probability': 0.9, \
                        'parents_portion': 0.3, \
                        'crossover_type':'uniform', \
-                       'max_iteration_without_improv':10}
+                       'max_iteration_without_improv':8}
 
     ga_model=ga(function=obj, dimension=4,variable_type='real',variable_boundaries=bound, algorithm_parameters=algorithm_param)
 
@@ -123,6 +123,15 @@ def cost(mgP, gluP, naP, working_cost, bounds):
     return ','.join(map(str, formatted_list))
 
 def profit(working_cost, mgP, gluP, naP,product_value, bounds):
+    # Manipulation of inputs
+    working_cost = float(str(working_cost))
+    mgP = float(str(mgP))
+    gluP = float(str(gluP))
+    naP = float(str(naP))
+    product_value = float(str(product_value))
+    bounds = np.array(bounds)
+
+    # Objective function
     def prof_obj(X):
         time = X[0]
         mg = X[1]
@@ -142,7 +151,21 @@ def profit(working_cost, mgP, gluP, naP,product_value, bounds):
     dict = runGA(prof_obj, bounds)
     profit = dict["function"]
     values = dict["variable"]
-    return str(-profit)
+    # Predict protein
+    values = np.array(values)
+    input_data = values.astype(np.float32)
+    input_data = input_data.reshape(1,4)
+    interpreter.set_tensor(input_details[0]['index'], input_data)
+    interpreter.invoke()
+    protein = interpreter.get_tensor(output_details[0]['index'])
+
+    profit = np.array([-profit])
+    protein = np.array(protein)
+    protein = protein.reshape(profit.shape)
+    print(protein)
+    pro = np.concatenate((values, protein, profit))
+    formatted_list = [format(num, '.4f') for num in pro]
+    return ','.join(map(str, formatted_list))
 
 def npy():
     # working_cost = float(str(working_cost))

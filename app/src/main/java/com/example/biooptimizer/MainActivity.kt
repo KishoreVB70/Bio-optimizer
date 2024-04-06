@@ -20,22 +20,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+        // Python
         if (! Python.isStarted()) {
             Python.start(AndroidPlatform(this));
         }
         val py = Python.getInstance()
         val module = py.getModule("genetic")
-
-        // Getting the button elements
-        var pureButton = findViewById<Button>(R.id.btnpure)
-        var costButton = findViewById<Button>(R.id.btncost)
-        var timeButton = findViewById<Button>(R.id.btntime)
-        var profitButton = findViewById<Button>(R.id.btnprofit)
-        var limitButton = findViewById<Button>(R.id.btnlimit)
-        var masterButton = findViewById<Button>(R.id.btnmaster)
-
         var resultFromPython = arrayOf<String>()
-
         val pythonArray = arrayOf(
             floatArrayOf(24f, 30f),
             floatArrayOf(0.012f, 0.082f),
@@ -43,9 +35,16 @@ class MainActivity : AppCompatActivity() {
             floatArrayOf(0.4f, 1.8f)
         )
 
-        // Listeners
-        pureButton.setOnClickListener {
+        // Elements
+        var pureButton = findViewById<Button>(R.id.btnpure)
+        var costButton = findViewById<Button>(R.id.btncost)
+        var timeButton = findViewById<Button>(R.id.btntime)
+        var profitButton = findViewById<Button>(R.id.btnprofit)
+        var limitButton = findViewById<Button>(R.id.btnlimit)
+        var masterButton = findViewById<Button>(R.id.btnmaster)
 
+        // Action 1
+        pureButton.setOnClickListener {
             try {
                 val result = module.callAttr(
                     "pure", pythonArray).toString()
@@ -58,8 +57,8 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this@MainActivity, ResultActivity::class.java)
 
             var time = resultFromPython[0]
-            var glu  = resultFromPython[1]
-            var mg = resultFromPython[2]
+            var mg = resultFromPython[1]
+            var glu  = resultFromPython[2]
             var na = resultFromPython[3]
             var yield = resultFromPython[4]
 
@@ -71,6 +70,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // Action 2
         timeButton.setOnClickListener {
             try {
                 val result = module.callAttr(
