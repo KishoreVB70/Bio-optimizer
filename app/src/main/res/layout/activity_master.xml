@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Optimizer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter bounds of inputs"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        >
+        <EditText
+            android:id="@+id/edttimelow"
+            android:layout_width="160dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:hint="Time lower bound"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:inputType="numberDecimal"/>
+        <EditText
+            android:id="@+id/edttimehigh"
+            android:layout_width="160dp"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="15dp"
+            android:hint="Time upper bound"
+            android:inputType="numberDecimal"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="center">
+        <EditText
+            android:id="@+id/edtglulow"
+            android:layout_width="160dp"
+            android:textSize="15dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="wrap_content"
+            android:hint="Glucose lower bound"
+            android:layout_marginTop="50dp"
+            android:inputType="numberDecimal"/>
+        <EditText
+            android:id="@+id/edtgluhigh"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:hint="Glucose upper bound"
+            android:layout_marginTop="50dp"
+            android:inputType="numberDecimal"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/edtmglow"
+            android:layout_width="160dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:hint="MgSO4 lower bound"
+            android:gravity="center"
+            android:layout_marginTop="50dp"
+            android:inputType="numberDecimal"/>
+        <EditText
+            android:id="@+id/edtmghigh"
+            android:layout_width="160dp"
+            android:textSize="15dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="MgSO4 upper bound"
+            android:layout_marginTop="50dp"
+            android:inputType="numberDecimal"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        >
+        <EditText
+            android:id="@+id/edtnalow"
+            android:layout_width="160dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="wrap_content"
+            android:hint="Na2HPO4 lower bound"
+            android:textSize="15dp"
+            android:layout_marginTop="50dp"
+            android:inputType="numberDecimal"/>
+        <EditText
+            android:id="@+id/edtnahigh"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:hint="Na2HPO4 upper bound"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="50dp"
+            android:inputType="numberDecimal"/>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/txtView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select objective:"
+        android:layout_marginTop="30dp"
+        android:textSize = "20dp"
+        android:layout_gravity="center"
+        />
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_alignBottom="@id/txtView"/>
+
+    <Button
+        android:id="@+id/btnsubmit"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:text="Optimize" />
+
+</LinearLayout>

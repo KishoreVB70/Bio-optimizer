@@ -21,53 +21,51 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/edtworking"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="Enter Working cost "
+        android:layout_marginTop="50dp"
+        android:inputType="numberDecimal"/>
+    <EditText
+        android:id="@+id/edtmg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="Enter MgSO4 cost "
+        android:layout_marginTop="50dp"
+        android:inputType="numberDecimal"/>
+    <EditText
+        android:id="@+id/edtglu"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:hint="Enter glucose cost "
+        android:layout_marginTop="50dp"
+        android:inputType="numberDecimal"/>
+    <EditText
+        android:id="@+id/edtna"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+
+        android:hint="Enter Na2HPO4 cost"
+        android:layout_marginTop="50dp"
+        android:inputType="numberDecimal"/>
     <Button
-        android:id="@+id/btnpure"
+        android:id="@+id/btnsubmit"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Pure optimization"
+        android:text="Optimize"
         android:layout_marginTop="50dp"
         />
-
-    <Button
-        android:id="@+id/btntime"
-        android:layout_width="250dp"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:text="Time optimization" />
-
-    <Button
-        android:id="@+id/btncost"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:text="Cost optimization" />
-
-    <Button
-        android:id="@+id/btnprofit"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center"
-        android:text="Profit optimization" />
-
-    <Button
-        android:id="@+id/btnlimit"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center"
-        android:text="Limit optimization" />
-
-    <Button
-        android:id="@+id/btnmaster"
-        android:layout_width="250dp"
-        android:layout_marginTop="50dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Master controls" />
+        android:id="@+id/txtresult"
+        />
 
 </LinearLayout>

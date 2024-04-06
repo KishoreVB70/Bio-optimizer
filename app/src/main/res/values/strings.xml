@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">Bio optimizer</string>
+    <string name="app_name">Optimizer</string>
+    <string name="selected_item">Selected item:</string>
+
+    <string-array name="Languages">
+        <item>Pure optimization</item>
+        <item>Time optimization</item>
+        <item>Cost optimization</item>
+        <item>Profit optimization</item>
+    </string-array>
 </resources>
