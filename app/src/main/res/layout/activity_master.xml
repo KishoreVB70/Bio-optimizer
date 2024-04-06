@@ -64,30 +64,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
-        android:layout_gravity="center">
-        <EditText
-            android:id="@+id/edtglulow"
-            android:layout_width="160dp"
-            android:textSize="15dp"
-            android:layout_marginRight="10dp"
-            android:layout_height="wrap_content"
-            android:hint="Glucose lower bound"
-            android:layout_marginTop="50dp"
-            android:inputType="numberDecimal"/>
-        <EditText
-            android:id="@+id/edtgluhigh"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:hint="Glucose upper bound"
-            android:layout_marginTop="50dp"
-            android:inputType="numberDecimal"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginLeft="10dp"
         android:orientation="horizontal">
@@ -114,6 +90,32 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="center">
+        <EditText
+            android:id="@+id/edtglulow"
+            android:layout_width="160dp"
+            android:textSize="15dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="Glucose lower bound"
+            android:layout_marginTop="50dp"
+            android:inputType="numberDecimal"/>
+        <EditText
+            android:id="@+id/edtgluhigh"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:gravity="center"
+            android:hint="Glucose upper bound"
+            android:layout_marginTop="50dp"
+            android:inputType="numberDecimal"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="horizontal"
         android:layout_marginLeft="10dp"
@@ -124,6 +126,7 @@
             android:layout_marginRight="10dp"
             android:layout_height="wrap_content"
             android:hint="Na2HPO4 lower bound"
+            android:gravity="center"
             android:textSize="15dp"
             android:layout_marginTop="50dp"
             android:inputType="numberDecimal"/>
@@ -132,6 +135,7 @@
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:textSize="15dp"
+            android:gravity="center"
             android:hint="Na2HPO4 upper bound"
             android:layout_marginRight="15dp"
             android:layout_marginTop="50dp"

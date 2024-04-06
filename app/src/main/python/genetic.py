@@ -37,13 +37,16 @@ def pure(bounds):
         results = interpreter.get_tensor(output_details[0]['index'])
         return -results
     bounds  = np.array(bounds)
+    print(bounds)
     dict = runGA(pure_obj, bounds)
     protein = dict["function"]
     values = dict["variable"]
     protein = np.array([-protein])
+    protein = protein.reshape(1,)
     pro = np.concatenate((values, protein))
     formatted_list = [format(num, '.4f') for num in pro]
     return ','.join(map(str, formatted_list))
+
 
 
 def time(bounds):
