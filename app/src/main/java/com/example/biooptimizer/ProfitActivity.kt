@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -24,11 +25,26 @@ class ProfitActivity : AppCompatActivity() {
         val module = py.getModule("genetic")
         var resultFromPython = arrayOf<String>()
 
+
+        val workingLowFloat = intent.getFloatExtra("workingLowFloat", 24f)
+        val workingHighFloat = intent.getFloatExtra("workingHighFloat", 35f)
+
+        val mgLowFloat = intent.getFloatExtra("mgLowFloat", 0.012f)
+        val mgHighFloat = intent.getFloatExtra("mgHighFloat", 0.082f)
+
+        val gluLowFloat = intent.getFloatExtra("gluLowFloat", 0.4f)
+        val gluHighFloat = intent.getFloatExtra("gluHighFloat", 1f)
+
+        val naLowFloat = intent.getFloatExtra("naLowFloat", 0.4f)
+        val naHighFloat = intent.getFloatExtra("naHighFloat", 1.8f)
+
+
+
         val pythonArray = arrayOf(
-            floatArrayOf(24f, 35f),
-            floatArrayOf(0.012f, 0.082f),
-            floatArrayOf(0.4f, 1f),
-            floatArrayOf(0.4f, 1.8f)
+            floatArrayOf(workingLowFloat, workingHighFloat),
+            floatArrayOf(mgLowFloat, mgHighFloat),
+            floatArrayOf(gluLowFloat, gluHighFloat),
+            floatArrayOf(naLowFloat, naHighFloat)
         )
 
         //Elements

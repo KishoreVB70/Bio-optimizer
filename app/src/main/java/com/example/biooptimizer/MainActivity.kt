@@ -84,8 +84,8 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this@MainActivity, ResultActivity::class.java)
             Intent(this@MainActivity, ResultActivity::class.java)
             var time = resultFromPython[0]
-            var glu  = resultFromPython[1]
-            var mg = resultFromPython[2]
+            var mg = resultFromPython[1]
+            var glu  = resultFromPython[2]
             var na = resultFromPython[3]
             var yield = resultFromPython[4]
             var resultValue = resultFromPython[5]

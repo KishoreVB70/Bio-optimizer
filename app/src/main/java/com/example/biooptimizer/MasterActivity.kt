@@ -2,6 +2,8 @@ package com.example.optimizer
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcel
+import android.os.Parcelable
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
@@ -159,11 +161,29 @@ class MasterActivity : AppCompatActivity() {
                     }
 
                     "Cost optimization" -> {
-                        startActivity(Intent(this, CostActivity::class.java))
+                        val intent = Intent(this@MasterActivity, CostActivity::class.java)
+                        intent.putExtra("workingLowFloat", workingLowFloat)
+                        intent.putExtra("workingHighFloat", workingHighFloat)
+                        intent.putExtra("mgLowFloat", mgLowFloat)
+                        intent.putExtra("mgHighFloat", mgHighFloat)
+                        intent.putExtra("gluLowFloat", gluLowFloat)
+                        intent.putExtra("gluHighFloat", gluHighFloat)
+                        intent.putExtra("naLowFloat", naLowFloat)
+                        intent.putExtra("naHighFloat", naHighFloat)
+                        startActivity(intent)
                     }
 
                     "Profit optimization" -> {
-                        startActivity(Intent(this, ProfitActivity::class.java))
+                        val intent = Intent(this@MasterActivity, ProfitActivity::class.java)
+                        intent.putExtra("workingLowFloat", workingLowFloat)
+                        intent.putExtra("workingHighFloat", workingHighFloat)
+                        intent.putExtra("mgLowFloat", mgLowFloat)
+                        intent.putExtra("mgHighFloat", mgHighFloat)
+                        intent.putExtra("gluLowFloat", gluLowFloat)
+                        intent.putExtra("gluHighFloat", gluHighFloat)
+                        intent.putExtra("naLowFloat", naLowFloat)
+                        intent.putExtra("naHighFloat", naHighFloat)
+                        startActivity(intent)
                     }
                 }
             }
