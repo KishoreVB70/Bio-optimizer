@@ -21,7 +21,7 @@ def runGA(obj, bound):
 
     ga_model=ga(function=obj, dimension=4,variable_type='real',variable_boundaries=bound, algorithm_parameters=algorithm_param)
 
-    # Run the genetic algorithm
+    # Run the genetic algorithm for the algorithm
     ga_model.run()
     return ga_model.output_dict
 
@@ -36,11 +36,15 @@ def pure(bounds):
         interpreter.invoke()
         results = interpreter.get_tensor(output_details[0]['index'])
         return -results
+#     bounds = np.array([[24,30], [0.012,0.082], [0.4,1], [0.4,1.8]])
+    bounds  = np.array(bounds)
     dict = runGA(pure_obj, bounds)
     protein = dict["function"]
     values = dict["variable"]
     protein = np.array([-protein])
-    return np.concatenate((values, protein))
+    pro = np.concatenate((values, protein))
+    formatted_list = [format(num, '.4f') for num in pro]
+    return ','.join(map(str, formatted_list))
 
 
 def profit(working_cost, mgP, gluP, naP,product_value, bounds):

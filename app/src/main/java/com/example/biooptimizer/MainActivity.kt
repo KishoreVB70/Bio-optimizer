@@ -19,9 +19,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         if (! Python.isStarted()) {
             Python.start(AndroidPlatform(this));
         }
+        val py = Python.getInstance()
+        val module = py.getModule("genetic")
 
         // Getting the button elements
         var pureButton = findViewById<Button>(R.id.btnpure)
@@ -31,20 +34,39 @@ class MainActivity : AppCompatActivity() {
         var limitButton = findViewById<Button>(R.id.btnlimit)
         var masterButton = findViewById<Button>(R.id.btnmaster)
 
+        var resultFromPython = arrayOf<String>()
+
         // Listeners
         pureButton.setOnClickListener {
-            val intent = Intent(this@MainActivity, ResultActivity::class.java)
-            var yield = 50
-            var time = 30
-            var glu  = 0.8
-            var mg = 0.018
-            var na = 1.4
 
-            intent.putExtra("yield", yield.toString())
-            intent.putExtra("time", time.toString())
-            intent.putExtra("glu", glu.toString())
-            intent.putExtra("mg", mg.toString())
-            intent.putExtra("na", na.toString())
+            val pythonArray = arrayOf(
+                floatArrayOf(24f, 30f),
+                floatArrayOf(0.012f, 0.082f),
+                floatArrayOf(0.4f, 1f),
+                floatArrayOf(0.4f, 1.8f)
+            )
+            try {
+                val result = module.callAttr(
+                    "pure", pythonArray).toString()
+                resultFromPython = result.split(",").toTypedArray()
+            } catch (e: PyException) {
+                Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
+                println(e.message)
+            }
+
+            val intent = Intent(this@MainActivity, ResultActivity::class.java)
+
+            var time = resultFromPython[0]
+            var glu  = resultFromPython[1]
+            var mg = resultFromPython[2]
+            var na = resultFromPython[3]
+            var yield = resultFromPython[4]
+
+            intent.putExtra("yield", yield)
+            intent.putExtra("time", time)
+            intent.putExtra("glu", glu)
+            intent.putExtra("mg", mg)
+            intent.putExtra("na", na)
             startActivity(intent)
         }
 
