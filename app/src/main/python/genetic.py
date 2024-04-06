@@ -25,7 +25,7 @@ def runGA(obj, bound):
     ga_model.run()
     return ga_model.output_dict
 
-# Function 1 -> Pure
+
 def pure(bounds):
     def pure_obj(X):
         X = [X]
@@ -36,7 +36,6 @@ def pure(bounds):
         interpreter.invoke()
         results = interpreter.get_tensor(output_details[0]['index'])
         return -results
-#     bounds = np.array([[24,30], [0.012,0.082], [0.4,1], [0.4,1.8]])
     bounds  = np.array(bounds)
     dict = runGA(pure_obj, bounds)
     protein = dict["function"]
@@ -80,6 +79,49 @@ def time(bounds):
     formatted_list = [format(num, '.4f') for num in pro]
     return ','.join(map(str, formatted_list))
 
+def cost(mgP, gluP, naP, working_cost, bounds):
+    working_cost = float(str(working_cost))
+    mgP = float(str(mgP))
+    gluP = float(str(gluP))
+    naP = float(str(naP))
+
+    def cost_obj(X):
+        time = X[0]
+        mg = X[1]
+        glu = X[2]
+        na = X[3]
+        X = [X]
+        X = np.array(X)
+        input_data = X.astype(np.float32)
+        input_data = input_data.reshape(1,4)
+        interpreter.set_tensor(input_details[0]['index'], input_data)
+        interpreter.invoke()
+        protein = interpreter.get_tensor(output_details[0]['index'])
+        price  = mg*mgP + glu*gluP + na*naP + time* working_cost
+        result = protein/price
+        return -result
+
+    bounds = np.array(bounds)
+    dict = runGA(cost_obj, bounds)
+    cost = dict["function"]
+    values = dict["variable"]
+
+    # Predict protein
+    values = np.array(values)
+    input_data = values.astype(np.float32)
+    input_data = input_data.reshape(1,4)
+    interpreter.set_tensor(input_details[0]['index'], input_data)
+    interpreter.invoke()
+    protein = interpreter.get_tensor(output_details[0]['index'])
+
+    cost = np.array([-cost])
+    protein = np.array(protein)
+    protein = protein.reshape(cost.shape)
+    print(protein)
+    pro = np.concatenate((values, protein, cost))
+    formatted_list = [format(num, '.4f') for num in pro]
+    return ','.join(map(str, formatted_list))
+
 def profit(working_cost, mgP, gluP, naP,product_value, bounds):
     def prof_obj(X):
         time = X[0]
@@ -101,28 +143,6 @@ def profit(working_cost, mgP, gluP, naP,product_value, bounds):
     profit = dict["function"]
     values = dict["variable"]
     return str(-profit)
-
-def cost(mgP, gluP, naP, working_cost, bounds):
-    def cost_obj(X):
-        time = X[0]
-        mg = X[1]
-        glu = X[2]
-        na = X[3]
-        X = [X]
-        X = np.array(X)
-        input_data = X.astype(np.float32)
-        input_data = input_data.reshape(1,4)
-        interpreter.set_tensor(input_details[0]['index'], input_data)
-        interpreter.invoke()
-        protein = interpreter.get_tensor(output_details[0]['index'])
-        price  = mg*mgP + glu*gluP + na*naP + time* working_cost
-        result = protein/price
-        return -result
-    dict = runGA(cost_obj, bounds)
-    cost = dict["function"]
-    values = dict["variable"]
-    # protein = model.predict(values)
-    return str(-cost)
 
 def npy():
     # working_cost = float(str(working_cost))
