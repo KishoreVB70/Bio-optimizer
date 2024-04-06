@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_gravity="center"
     tools:context=".MainActivity"
     >
 
@@ -17,57 +18,77 @@
         android:textStyle="bold"
         android:textSize="25dp"
         android:gravity="center"
+        android:layout_gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnpure"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
+    <ImageView
         android:layout_gravity="center"
-        android:text="Pure optimization"
-        android:layout_marginTop="50dp"
-        />
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/bacteria"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:layout_marginLeft="10dp"
+    ></ImageView>
 
-    <Button
-        android:id="@+id/btntime"
-        android:layout_width="250dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:text="Time optimization" />
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        >
+        <Button
+            android:id="@+id/btnpure"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Pure optimization"
+            />
 
-    <Button
-        android:id="@+id/btncost"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:text="Cost optimization" />
+        <Button
+            android:id="@+id/btntime"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:text="Time optimization" />
 
-    <Button
-        android:id="@+id/btnprofit"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center"
-        android:text="Profit optimization" />
+        <Button
+            android:id="@+id/btncost"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:text="Cost optimization" />
 
-    <Button
-        android:id="@+id/btnlimit"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center"
-        android:text="Limit optimization" />
+        <Button
+            android:id="@+id/btnprofit"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center"
+            android:text="Profit optimization" />
 
-    <Button
-        android:id="@+id/btnmaster"
-        android:layout_width="250dp"
-        android:layout_marginTop="50dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Master controls" />
+        <Button
+            android:id="@+id/btnlimit"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center"
+            android:text="Limit optimization" />
+
+        <Button
+            android:id="@+id/btnmaster"
+            android:layout_width="250dp"
+            android:layout_marginTop="50dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Master controls" />
+
+    </LinearLayout>
 
 </LinearLayout>

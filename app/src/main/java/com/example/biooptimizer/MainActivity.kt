@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         // Python
         if (! Python.isStarted()) {
             Python.start(AndroidPlatform(this));

@@ -21,51 +21,54 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/edtworking"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:hint="Enter Working cost "
-        android:layout_marginTop="50dp"
-        android:inputType="numberDecimal"/>
-    <EditText
-        android:id="@+id/edtmg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:hint="Enter MgSO4 cost "
-        android:layout_marginTop="50dp"
-        android:inputType="numberDecimal"/>
-    <EditText
-        android:id="@+id/edtglu"
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="wrap_content"
-        android:hint="Enter glucose cost "
-        android:layout_marginTop="50dp"
-        android:inputType="numberDecimal"/>
-    <EditText
-        android:id="@+id/edtna"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-
-        android:hint="Enter Na2HPO4 cost"
-        android:layout_marginTop="50dp"
-        android:inputType="numberDecimal"/>
-    <Button
-        android:id="@+id/btnsubmit"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:text="Optimize"
-        android:layout_marginTop="50dp"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtresult"
-        />
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginBottom="50dp">
+        <EditText
+            android:id="@+id/edtworking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="Enter Working cost "
+            android:inputType="numberDecimal"/>
+        <EditText
+            android:id="@+id/edtmg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="Enter MgSO4 cost "
+            android:layout_marginTop="50dp"
+            android:inputType="numberDecimal"/>
+        <EditText
+            android:id="@+id/edtglu"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:hint="Enter glucose cost "
+            android:layout_marginTop="50dp"
+            android:inputType="numberDecimal"/>
+        <EditText
+            android:id="@+id/edtna"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+
+            android:hint="Enter Na2HPO4 cost"
+            android:layout_marginTop="50dp"
+            android:inputType="numberDecimal"/>
+        <Button
+            android:id="@+id/btnsubmit"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Optimize"
+            android:layout_marginTop="50dp"
+            />
+
+    </LinearLayout>
 
 </LinearLayout>
