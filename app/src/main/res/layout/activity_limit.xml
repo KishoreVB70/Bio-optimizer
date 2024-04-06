@@ -45,7 +45,7 @@
         android:id="@+id/edtmg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter MgSO4 limit "
+        android:hint="Enter MgSO₄ limit "
         android:gravity="center"
         android:layout_marginTop="50dp"
         android:inputType="numberDecimal"/>
@@ -61,7 +61,7 @@
         android:id="@+id/edtna"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Na2HPO4 limit"
+        android:hint="Enter Na₂HPO₄ limit"
         android:layout_marginTop="50dp"
         android:gravity="center"
         android:inputType="numberDecimal"/>

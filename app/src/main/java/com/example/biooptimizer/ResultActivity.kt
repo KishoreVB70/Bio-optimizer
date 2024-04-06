@@ -1,10 +1,12 @@
 package com.example.optimizer
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.biooptimizer.R
+import java.text.DecimalFormat
 
 class ResultActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,6 +19,7 @@ class ResultActivity : AppCompatActivity() {
         val timeText = findViewById<TextView>(R.id.texttime)
         val mgText = findViewById<TextView>(R.id.textmg)
         val naText = findViewById<TextView>(R.id.textna)
+        val optHeading = findViewById<TextView>(R.id.header)
 
 
         var yield = intent.getStringExtra("yield")?: "45"
@@ -38,10 +41,19 @@ class ResultActivity : AppCompatActivity() {
                 "profit" -> resultText.text = "Profit: $resultValue"
             }
         } else {
-            resultText.text = ""
+            resultText.setVisibility(View.GONE)
         }
 
-        yieldText.text = "Arrived yield : $yield mg/100ml"
+        var yieldValue = yield.toFloat()
+        yieldValue /= 100
+        val decimalFormat = DecimalFormat("#.####")
+        // Format the value using the DecimalFormat object
+        val formattedValue = decimalFormat.format(yieldValue)
+
+
+        yield = formattedValue.toString()
+
+        yieldText.text = "Arrived yield : $yield mg/ml"
         timeText.text = "Time : $time hours"
         gluText.text = "Glucose : $glu grams"
         mgText.text = "MgSO₄ : $mg grams"

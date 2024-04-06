@@ -10,7 +10,7 @@ input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
 
 def runGA(obj, bound):
-    algorithm_param = {'max_num_iteration': 20, \
+    algorithm_param = {'max_num_iteration': 10, \
                        'population_size':100, \
                        'mutation_probability':0.01, \
                        'elit_ratio': 0.01, \

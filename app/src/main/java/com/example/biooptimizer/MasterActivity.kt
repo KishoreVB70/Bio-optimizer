@@ -55,6 +55,7 @@ class MasterActivity : AppCompatActivity() {
         if (spinner != null) {
             val adapter = ArrayAdapter(this,
                 android.R.layout.simple_spinner_item, languages)
+            adapter.setDropDownViewResource(android.R.layout.select_dialog_item)
             spinner.adapter = adapter
         }
 

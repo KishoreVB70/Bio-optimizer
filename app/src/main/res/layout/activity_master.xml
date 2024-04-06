@@ -40,7 +40,7 @@
         android:textStyle="bold"
         android:textSize="15dp"
         android:gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -59,13 +59,13 @@
             android:layout_height="wrap_content"
             android:textSize="15dp"
             android:hint="Time lower bound"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:gravity="center"
             android:inputType="numberDecimal"/>
         <EditText
             android:id="@+id/edttimehigh"
             android:layout_width="160dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="15dp"
@@ -84,9 +84,9 @@
             android:layout_marginRight="10dp"
             android:layout_height="wrap_content"
             android:textSize="15dp"
-            android:hint="MgSO4 lower bound"
+            android:hint="MgSO₄ lower bound"
             android:gravity="center"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:inputType="numberDecimal"/>
         <EditText
             android:id="@+id/edtmghigh"
@@ -94,8 +94,8 @@
             android:textSize="15dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:hint="MgSO4 upper bound"
-            android:layout_marginTop="50dp"
+            android:hint="MgSO₄ upper bound"
+            android:layout_marginTop="30dp"
             android:inputType="numberDecimal"/>
     </LinearLayout>
     <LinearLayout
@@ -112,7 +112,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:hint="Glucose lower bound"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:inputType="numberDecimal"/>
         <EditText
             android:id="@+id/edtgluhigh"
@@ -121,7 +121,7 @@
             android:textSize="15dp"
             android:gravity="center"
             android:hint="Glucose upper bound"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:inputType="numberDecimal"/>
     </LinearLayout>
     <LinearLayout
@@ -136,10 +136,10 @@
             android:layout_width="160dp"
             android:layout_marginRight="10dp"
             android:layout_height="wrap_content"
-            android:hint="Na2HPO4 lower bound"
+            android:hint="Na₂HPO₄ lower bound"
             android:gravity="center"
             android:textSize="15dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:inputType="numberDecimal"/>
         <EditText
             android:id="@+id/edtnahigh"
@@ -147,33 +147,35 @@
             android:layout_height="wrap_content"
             android:textSize="15dp"
             android:gravity="center"
-            android:hint="Na2HPO4 upper bound"
+            android:hint="Na₂HPO₄ upper bound"
             android:layout_marginRight="15dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:inputType="numberDecimal"/>
     </LinearLayout>
-    <TextView
-        android:id="@+id/txtView"
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select objective:"
-        android:layout_marginTop="30dp"
-        android:textSize = "20dp"
         android:layout_gravity="center"
-        />
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:layout_alignBottom="@id/txtView"/>
+        android:gravity="center"
+        android:background="@drawable/border_background"
+        android:layout_marginTop="40dp"
+        >
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:layout_gravity="center" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/btnsubmit"
+        android:gravity="center"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="80dp"
         android:text="Optimize" />
 
 </LinearLayout>

@@ -44,7 +44,7 @@
         android:textSize="22dp"
         android:background="@color/white"
         android:textColor="@color/black"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="60dp"
         android:textStyle="bold"/>
     <TextView
         android:layout_gravity="center"
@@ -55,7 +55,7 @@
         android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="60dp"
         android:text="Profit obtained: "
         android:textSize="20dp"
         android:textStyle="bold"/>
@@ -66,7 +66,7 @@
         android:background="@drawable/border_background"
         android:layout_gravity="center"
         android:gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="60dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="40dp"
@@ -100,7 +100,7 @@
             android:id="@+id/textmg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="MgSO4: "
+            android:text="MgSO₄: "
             android:gravity="center"
             android:textSize="20dp"
             android:layout_marginTop="20dp"
@@ -121,11 +121,11 @@
             android:id="@+id/textna"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Na2HPO4: "
+            android:text="Na₂HPO₄: "
             android:textSize="20dp"
             android:gravity="center"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="20dp"
             />
 
 
