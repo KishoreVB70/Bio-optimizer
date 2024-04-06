@@ -103,11 +103,25 @@ def time(bounds):
         protein = interpreter.get_tensor(output_details[0]['index'])
         result = protein/time
         return -result
+    bounds = np.array(bounds)
     dict =  runGA(time_obj, bounds)
     perTime = dict["function"]
     values = dict["variable"]
-    # protein = model.predict(values)
-    return str(-perTime)
+
+    # Predict protein
+    values = np.array(values)
+    input_data = values.astype(np.float32)
+    input_data = input_data.reshape(1,4)
+    interpreter.set_tensor(input_details[0]['index'], input_data)
+    interpreter.invoke()
+    protein = interpreter.get_tensor(output_details[0]['index'])
+
+    protein = np.array([protein])
+    perTime = np.array([-perTime])
+    pro = np.concatenate((values, protein, perTime))
+    formatted_list = [format(num, '.4f') for num in pro]
+    return ','.join(map(str, formatted_list))
+
 
 def npy():
     # working_cost = float(str(working_cost))
