@@ -96,6 +96,7 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("mg", mg)
             intent.putExtra("na", na)
             intent.putExtra("resultValue", resultValue)
+            intent.putExtra("optimizer", "time")
 
             startActivity(intent)
         }

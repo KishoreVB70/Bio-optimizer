@@ -25,12 +25,26 @@ class ResultActivity : AppCompatActivity() {
         var glu  = intent.getStringExtra("glu")?: "0.8"
         var mg = intent.getStringExtra("mg")?: "0.018"
         var na = intent.getStringExtra("na")?: "1.14"
+        val receivedString = intent.getStringExtra("resultValue")
+
+        val optimizerType = intent.getStringExtra("optimizer")
+
+
+        if (receivedString != null) {
+            when(optimizerType){
+
+                "time" -> resultText.text = "Protein per unit time: $resultValue"
+                "cost" -> resultText.text = "Cost per unit protein: $resultValue"
+                "profit" -> resultText.text = "Profit: $resultValue"
+            }
+        } else {
+            resultText.text = ""
+        }
 
         yieldText.text = "Arrived yield: $yield mg per ml"
-        resultText.text = "Result value: $resultValue"
         timeText.text = "Time: $time hours"
         gluText.text = "Glucose: $glu grams"
-        mgText.text = "Magnesium sulphate: $mg grams"
-        naText.text = "Disodium hydrogen phosphate: $na grams"
+        mgText.text = "MgSO4: $mg grams"
+        naText.text = "Na2HPO4: $na grams"
     }
 }

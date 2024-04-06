@@ -102,6 +102,7 @@ class CostActivity : AppCompatActivity() {
                 intent.putExtra("mg", mg)
                 intent.putExtra("na", na)
                 intent.putExtra("resultValue", resultValue)
+                intent.putExtra("optimizer", "cost")
                 startActivity(intent)
             }
         }

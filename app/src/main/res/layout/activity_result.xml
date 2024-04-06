@@ -10,6 +10,7 @@
     >
 
     <TextView
+        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Optimizer"
@@ -22,6 +23,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:layout_gravity="center"
+        android:gravity="center"
         android:id="@+id/textyield"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,6 +33,8 @@
         android:layout_marginTop="30dp"
         android:textStyle="bold"/>
     <TextView
+        android:layout_gravity="center"
+        android:gravity="center"
         android:id="@+id/textresult"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,51 +42,75 @@
         android:text="Profit obtained: "
         android:textSize="20dp"
         android:textStyle="bold"/>
-
-    <TextView
-        android:id="@+id/header"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Optimal Inputs"
-        android:textSize="30dp"
-        android:layout_marginTop="50dp"
-        android:textStyle="bold"/>
+        android:orientation="vertical"
+        android:background="@drawable/border_background"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+
+    >
+        <TextView
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Optimal Inputs"
+            android:textSize="30dp"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            />
 
 
 
-    <TextView
-        android:id="@+id/texttime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Time: "
-        android:textSize="20dp"
-        android:layout_marginTop="20dp"
-        />
+        <TextView
+            android:id="@+id/texttime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Time: "
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_marginTop="30dp"
+            />
 
-    <TextView
-        android:id="@+id/textmg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Magnesium sulphate: "
-        android:textSize="20dp"
-        android:layout_marginTop="20dp"
-        />
+        <TextView
+            android:id="@+id/textmg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MgSO4: "
+            android:gravity="center"
+            android:textSize="20dp"
+            android:layout_marginTop="20dp"
+            />
 
-    <TextView
-        android:id="@+id/textglu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Glucose: "
-        android:textSize="20dp"
-        android:layout_marginTop="20dp"
-        />
+        <TextView
+            android:id="@+id/textglu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Glucose: "
+            android:textSize="20dp"
+            android:gravity="center"
 
-    <TextView
-        android:id="@+id/textna"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Disodium hydrogen phosphate: "
-        android:textSize="20dp"
-        android:layout_marginTop="20dp"
-        />
+            android:layout_marginTop="20dp"
+            />
+
+        <TextView
+            android:id="@+id/textna"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Na2HPO4: "
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            />
+
+
+    </LinearLayout>
 </LinearLayout>
