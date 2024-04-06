@@ -9,6 +9,7 @@
     tools:context=".MainActivity"
     >
 
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,9 +18,20 @@
         android:textStyle="bold"
         android:textSize="25dp"
         android:gravity="center"
+        android:layout_gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_gravity="center"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/horizontalprotein"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        ></ImageView>
+
 
     <EditText
         android:id="@+id/edtworking"

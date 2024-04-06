@@ -22,7 +22,6 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.optimizer.LimitActivity"/>
-        <activity android:name="com.example.optimizer.TimeActivity"/>
         <activity android:name="com.example.optimizer.ProfitActivity"/>
         <activity android:name="com.example.optimizer.CostActivity"/>
         <activity android:name="com.example.optimizer.ResultActivity"/>

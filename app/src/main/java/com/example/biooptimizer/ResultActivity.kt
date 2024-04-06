@@ -41,10 +41,10 @@ class ResultActivity : AppCompatActivity() {
             resultText.text = ""
         }
 
-        yieldText.text = "Arrived yield: $yield mg per ml"
-        timeText.text = "Time: $time hours"
-        gluText.text = "Glucose: $glu grams"
-        mgText.text = "MgSO4: $mg grams"
-        naText.text = "Na2HPO4: $na grams"
+        yieldText.text = "Arrived yield : $yield mg/100ml"
+        timeText.text = "Time : $time hours"
+        gluText.text = "Glucose : $glu grams"
+        mgText.text = "MgSO₄ : $mg grams"
+        naText.text = "Na₂HPO₄ : $na grams"
     }
 }
