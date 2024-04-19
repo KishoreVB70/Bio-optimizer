@@ -26,7 +26,7 @@ class MasterActivity : AppCompatActivity() {
             Python.start(AndroidPlatform(this));
         }
         val py = Python.getInstance()
-        val module = py.getModule("genetic")
+        val module = py.getModule("particle")
         var resultFromPython = arrayOf<String>()
         val pythonArray = arrayOf(
             floatArrayOf(24f, 30f),
@@ -63,16 +63,16 @@ class MasterActivity : AppCompatActivity() {
         submitButton.setOnClickListener {
 
             // Limits initialization
-            val workingLowEditText = workingLowEdit.text.toString().takeIf { it.isNotEmpty() } ?: "24.0"
+            val workingLowEditText = workingLowEdit.text.toString().takeIf { it.isNotEmpty() } ?: "20.01"
             val workingHighEditText = workingHighEdit.text.toString().takeIf { it.isNotEmpty() } ?: "32.0"
 
-            val mgLowEditText = mgLowEdit.text.toString().takeIf { it.isNotEmpty() } ?: "0.0"
+            val mgLowEditText = mgLowEdit.text.toString().takeIf { it.isNotEmpty() } ?: "0.015"
             val mgHighEditText = mgHighEdit.text.toString().takeIf { it.isNotEmpty() } ?: "0.082"
 
-            val gluLowEditText = gluLowEdit.text.toString().takeIf { it.isNotEmpty() } ?: "0.0"
-            val gluHighEditText = gluHighEdit.text.toString().takeIf { it.isNotEmpty() } ?: "1.0"
+            val gluLowEditText = gluLowEdit.text.toString().takeIf { it.isNotEmpty() } ?: "0.15"
+            val gluHighEditText = gluHighEdit.text.toString().takeIf { it.isNotEmpty() } ?: "2.0"
 
-            val naLowEditText = naLowEdit.text.toString().takeIf { it.isNotEmpty() } ?: "0.0"
+            val naLowEditText = naLowEdit.text.toString().takeIf { it.isNotEmpty() } ?: "0.045"
             val naHighEditText = naHighEdit.text.toString().takeIf { it.isNotEmpty() } ?: "1.8"
 
             val workingLowFloat = workingLowEditText.toFloat()
@@ -87,7 +87,7 @@ class MasterActivity : AppCompatActivity() {
             val naLowFloat = naLowEditText.toFloat()
             val naHighFloat = naHighEditText.toFloat()
 
-            var lowerDefaultValues = arrayOf(20.0, 0.015, 0.15, 0.045)
+            var lowerDefaultValues = arrayOf(20.0, 0.014, 0.14, 0.044)
 
 
             val editTexts = arrayOf(
@@ -97,117 +97,120 @@ class MasterActivity : AppCompatActivity() {
                 naLowFloat
             )
 
+            var isGood = true
+
             for (i in editTexts.indices) {
                 val inputValue = editTexts[i]
-
                 if (inputValue < lowerDefaultValues[i]) {
+                    isGood = false
                     Toast.makeText(
                         this,
-                        "Value in field ${i + 1} is lower than the limit",
+                        "Enter lower bound higher than ${lowerDefaultValues[i]}",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
             }
 
+            if (isGood) {
+                val pythonArray = arrayOf(
+                    floatArrayOf(workingLowFloat, workingHighFloat),
+                    floatArrayOf(mgLowFloat, mgHighFloat),
+                    floatArrayOf(gluLowFloat, gluHighFloat),
+                    floatArrayOf(naLowFloat, naHighFloat)
+                )
 
-            val pythonArray = arrayOf(
-                floatArrayOf(workingLowFloat, workingHighFloat),
-                floatArrayOf(mgLowFloat, mgHighFloat),
-                floatArrayOf(gluLowFloat, gluHighFloat),
-                floatArrayOf(naLowFloat, naHighFloat)
-            )
+                if (workingLowFloat > workingHighFloat ||
+                    mgLowFloat > mgHighFloat ||
+                    gluLowFloat > gluHighFloat ||
+                    naLowFloat > naHighFloat
+                ) {
+                    Toast.makeText(this, "Lower bounds cannot be greater than upper bounds", Toast.LENGTH_SHORT).show()
+                } else {
+                    val selectedItem = spinner.selectedItem as String
+                    when (selectedItem) {
+                        "Pure optimization" -> {
+                            try {
+                                val result = module.callAttr(
+                                    "pure", pythonArray
+                                ).toString()
+                                resultFromPython = result.split(",").toTypedArray()
+                            } catch (e: PyException) {
+                                Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
+                                println(e.message)
+                            }
 
-            if (workingLowFloat > workingHighFloat ||
-                mgLowFloat > mgHighFloat ||
-                gluLowFloat > gluHighFloat ||
-                naLowFloat > naHighFloat
-            ) {
-                Toast.makeText(this, "Lower bounds cannot be greater than upper bounds", Toast.LENGTH_SHORT).show()
-            } else {
-                val selectedItem = spinner.selectedItem as String
-                when (selectedItem) {
-                    "Pure optimization" -> {
-                        try {
-                            val result = module.callAttr(
-                                "pure", pythonArray
-                            ).toString()
-                            resultFromPython = result.split(",").toTypedArray()
-                        } catch (e: PyException) {
-                            Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
-                            println(e.message)
+                            val intent = Intent(this@MasterActivity, ResultActivity::class.java)
+
+                            var time = resultFromPython[0]
+                            var mg = resultFromPython[1]
+                            var glu = resultFromPython[2]
+                            var na = resultFromPython[3]
+                            var yield = resultFromPython[4]
+
+                            intent.putExtra("yield", yield)
+                            intent.putExtra("time", time)
+                            intent.putExtra("glu", glu)
+                            intent.putExtra("mg", mg)
+                            intent.putExtra("na", na)
+                            startActivity(intent)
                         }
 
-                        val intent = Intent(this@MasterActivity, ResultActivity::class.java)
+                        "Time optimization" -> {
+                            try {
+                                val result = module.callAttr(
+                                    "time", pythonArray
+                                ).toString()
+                                resultFromPython = result.split(",").toTypedArray()
+                            } catch (e: PyException) {
+                                Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
+                                println(e.message)
+                            }
 
-                        var time = resultFromPython[0]
-                        var mg = resultFromPython[1]
-                        var glu = resultFromPython[2]
-                        var na = resultFromPython[3]
-                        var yield = resultFromPython[4]
+                            val intent = Intent(this@MasterActivity, ResultActivity::class.java)
+                            Intent(this@MasterActivity, ResultActivity::class.java)
+                            var time = resultFromPython[0]
+                            var mg = resultFromPython[1]
+                            var glu = resultFromPython[2]
+                            var na = resultFromPython[3]
+                            var yield = resultFromPython[4]
+                            var resultValue = resultFromPython[5]
 
-                        intent.putExtra("yield", yield)
-                        intent.putExtra("time", time)
-                        intent.putExtra("glu", glu)
-                        intent.putExtra("mg", mg)
-                        intent.putExtra("na", na)
-                        startActivity(intent)
-                    }
+                            intent.putExtra("yield", yield)
+                            intent.putExtra("time", time)
+                            intent.putExtra("glu", glu)
+                            intent.putExtra("mg", mg)
+                            intent.putExtra("na", na)
+                            intent.putExtra("resultValue", resultValue)
+                            intent.putExtra("optimizer", "time")
 
-                    "Time optimization" -> {
-                        try {
-                            val result = module.callAttr(
-                                "time", pythonArray
-                            ).toString()
-                            resultFromPython = result.split(",").toTypedArray()
-                        } catch (e: PyException) {
-                            Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
-                            println(e.message)
+                            startActivity(intent)
                         }
 
-                        val intent = Intent(this@MasterActivity, ResultActivity::class.java)
-                        Intent(this@MasterActivity, ResultActivity::class.java)
-                        var time = resultFromPython[0]
-                        var mg = resultFromPython[1]
-                        var glu = resultFromPython[2]
-                        var na = resultFromPython[3]
-                        var yield = resultFromPython[4]
-                        var resultValue = resultFromPython[5]
+                        "Cost optimization" -> {
+                            val intent = Intent(this@MasterActivity, CostActivity::class.java)
+                            intent.putExtra("workingLowFloat", workingLowFloat)
+                            intent.putExtra("workingHighFloat", workingHighFloat)
+                            intent.putExtra("mgLowFloat", mgLowFloat)
+                            intent.putExtra("mgHighFloat", mgHighFloat)
+                            intent.putExtra("gluLowFloat", gluLowFloat)
+                            intent.putExtra("gluHighFloat", gluHighFloat)
+                            intent.putExtra("naLowFloat", naLowFloat)
+                            intent.putExtra("naHighFloat", naHighFloat)
+                            startActivity(intent)
+                        }
 
-                        intent.putExtra("yield", yield)
-                        intent.putExtra("time", time)
-                        intent.putExtra("glu", glu)
-                        intent.putExtra("mg", mg)
-                        intent.putExtra("na", na)
-                        intent.putExtra("resultValue", resultValue)
-                        intent.putExtra("optimizer", "time")
-
-                        startActivity(intent)
-                    }
-
-                    "Cost optimization" -> {
-                        val intent = Intent(this@MasterActivity, CostActivity::class.java)
-                        intent.putExtra("workingLowFloat", workingLowFloat)
-                        intent.putExtra("workingHighFloat", workingHighFloat)
-                        intent.putExtra("mgLowFloat", mgLowFloat)
-                        intent.putExtra("mgHighFloat", mgHighFloat)
-                        intent.putExtra("gluLowFloat", gluLowFloat)
-                        intent.putExtra("gluHighFloat", gluHighFloat)
-                        intent.putExtra("naLowFloat", naLowFloat)
-                        intent.putExtra("naHighFloat", naHighFloat)
-                        startActivity(intent)
-                    }
-
-                    "Profit optimization" -> {
-                        val intent = Intent(this@MasterActivity, ProfitActivity::class.java)
-                        intent.putExtra("workingLowFloat", workingLowFloat)
-                        intent.putExtra("workingHighFloat", workingHighFloat)
-                        intent.putExtra("mgLowFloat", mgLowFloat)
-                        intent.putExtra("mgHighFloat", mgHighFloat)
-                        intent.putExtra("gluLowFloat", gluLowFloat)
-                        intent.putExtra("gluHighFloat", gluHighFloat)
-                        intent.putExtra("naLowFloat", naLowFloat)
-                        intent.putExtra("naHighFloat", naHighFloat)
-                        startActivity(intent)
+                        "Profit optimization" -> {
+                            val intent = Intent(this@MasterActivity, ProfitActivity::class.java)
+                            intent.putExtra("workingLowFloat", workingLowFloat)
+                            intent.putExtra("workingHighFloat", workingHighFloat)
+                            intent.putExtra("mgLowFloat", mgLowFloat)
+                            intent.putExtra("mgHighFloat", mgHighFloat)
+                            intent.putExtra("gluLowFloat", gluLowFloat)
+                            intent.putExtra("gluHighFloat", gluHighFloat)
+                            intent.putExtra("naLowFloat", naLowFloat)
+                            intent.putExtra("naHighFloat", naHighFloat)
+                            startActivity(intent)
+                        }
                     }
                 }
             }
