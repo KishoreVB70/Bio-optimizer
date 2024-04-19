@@ -22,7 +22,7 @@ class LimitActivity : AppCompatActivity() {
             Python.start(AndroidPlatform(this));
         }
         val py = Python.getInstance()
-        val module = py.getModule("genetic")
+        val module = py.getModule("particle")
         var resultFromPython = arrayOf<String>()
 
 
@@ -33,8 +33,11 @@ class LimitActivity : AppCompatActivity() {
         var mgEdit = findViewById<EditText>(R.id.edtmg)
         var naEdit = findViewById<EditText>(R.id.edtna)
 
+        var lowerDefaultValues = arrayOf(20.0, 0.015, 0.15, 0.045)
+
         //Action
         submitButton.setOnClickListener {
+
             val workingEditText = workingEdit.text.toString().takeIf { it.isNotEmpty() } ?: "32.0"
             val mgEditText = mgEdit.text.toString().takeIf { it.isNotEmpty() } ?: "0.082"
             val gluEditText = gluEdit.text.toString().takeIf { it.isNotEmpty() } ?: "1.0"
@@ -45,35 +48,59 @@ class LimitActivity : AppCompatActivity() {
             val gluFloat = gluEditText.toFloat()
             val naFloat = naEditText.toFloat()
 
-            val pythonArray = arrayOf(
-                floatArrayOf(0f, workingFloat),
-                floatArrayOf(0f, mgFloat),
-                floatArrayOf(0f, gluFloat),
-                floatArrayOf(0f, naFloat)
+            val editTexts = arrayOf(
+                workingFloat,
+                mgFloat,
+                gluFloat,
+                naFloat
             )
-            try {
-                val result = module.callAttr(
-                    "pure", pythonArray).toString()
-                resultFromPython = result.split(",").toTypedArray()
-            } catch (e: PyException) {
-                Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
-                println(e.message)
+
+            var isGood = true
+            for (i in editTexts.indices) {
+                val inputValue = editTexts[i]
+
+                if (inputValue < lowerDefaultValues[i]) {
+                    isGood = false
+                    Toast.makeText(
+                        this,
+                        "Enter value higher than ${lowerDefaultValues[i]}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+            if (isGood) {
+                val pythonArray = arrayOf(
+                    floatArrayOf(0f, workingFloat),
+                    floatArrayOf(0f, mgFloat),
+                    floatArrayOf(0f, gluFloat),
+                    floatArrayOf(0f, naFloat)
+                )
+                try {
+                    val result = module.callAttr(
+                        "pure", pythonArray).toString()
+                    resultFromPython = result.split(",").toTypedArray()
+                } catch (e: PyException) {
+                    Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
+                    println(e.message)
+                }
+
+                val intent = Intent(this@LimitActivity, ResultActivity::class.java)
+
+                var time = resultFromPython[0]
+                var mg = resultFromPython[1]
+                var glu  = resultFromPython[2]
+                var na = resultFromPython[3]
+                var yield = resultFromPython[4]
+
+                intent.putExtra("yield", yield)
+                intent.putExtra("time", time)
+                intent.putExtra("glu", glu)
+                intent.putExtra("mg", mg)
+                intent.putExtra("na", na)
+                startActivity(intent)
             }
 
-            val intent = Intent(this@LimitActivity, ResultActivity::class.java)
 
-            var time = resultFromPython[0]
-            var mg = resultFromPython[1]
-            var glu  = resultFromPython[2]
-            var na = resultFromPython[3]
-            var yield = resultFromPython[4]
-
-            intent.putExtra("yield", yield)
-            intent.putExtra("time", time)
-            intent.putExtra("glu", glu)
-            intent.putExtra("mg", mg)
-            intent.putExtra("na", na)
-            startActivity(intent)
         }
     }
 }

@@ -87,6 +87,28 @@ class MasterActivity : AppCompatActivity() {
             val naLowFloat = naLowEditText.toFloat()
             val naHighFloat = naHighEditText.toFloat()
 
+            var lowerDefaultValues = arrayOf(20.0, 0.015, 0.15, 0.045)
+
+
+            val editTexts = arrayOf(
+                workingLowFloat,
+                mgLowFloat,
+                gluLowFloat,
+                naLowFloat
+            )
+
+            for (i in editTexts.indices) {
+                val inputValue = editTexts[i]
+
+                if (inputValue < lowerDefaultValues[i]) {
+                    Toast.makeText(
+                        this,
+                        "Value in field ${i + 1} is lower than the limit",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
 
             val pythonArray = arrayOf(
                 floatArrayOf(workingLowFloat, workingHighFloat),

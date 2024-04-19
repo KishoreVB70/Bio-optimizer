@@ -25,13 +25,13 @@ class MainActivity : AppCompatActivity() {
             Python.start(AndroidPlatform(this));
         }
         val py = Python.getInstance()
-        val module = py.getModule("genetic")
+        val module = py.getModule("particle")
         var resultFromPython = arrayOf<String>()
         val pythonArray = arrayOf(
-            floatArrayOf(24f, 30f),
+            floatArrayOf(24.01f, 30f),
             floatArrayOf(0.012f, 0.082f),
-            floatArrayOf(0.4f, 1f),
-            floatArrayOf(0.4f, 1.8f)
+            floatArrayOf(0.4f, 2.01f),
+            floatArrayOf(0.4f, 2.69f)
         )
 
         // Elements

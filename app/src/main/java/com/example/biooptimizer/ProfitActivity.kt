@@ -17,7 +17,8 @@ class ProfitActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profit)
-        // Python Stuff
+        // Python
+
         if (!Python.isStarted()) {
             Python.start(AndroidPlatform(this))
         }
@@ -77,12 +78,9 @@ class ProfitActivity : AppCompatActivity() {
                 try {
                     val result = module.callAttr(
                         "profit",
-                        workingEditText,
-                        gluEditText,
-                        mgEditText,
-                        naEditText,
-                        valueEditText,
-                        pythonArray
+                        workingEditText, gluEditText,
+                        mgEditText, naEditText,
+                        valueEditText, pythonArray
                     ).toJava(String::class.java)
                     resultFromPython = result.split(",").toTypedArray()
                 } catch (e: PyException) {
