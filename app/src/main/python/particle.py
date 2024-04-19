@@ -1,5 +1,5 @@
 import tflite_runtime.interpreter as tflite
-from geneticalgorithm import geneticalgorithm as ga
+from pyswarm import pso
 import numpy as np
 from os.path import dirname, join
 
@@ -9,22 +9,12 @@ interpreter.allocate_tensors()
 input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
 
-def runGA(obj, bound):
-    algorithm_param = {'max_num_iteration': 10, \
-                       'population_size':100, \
-                       'mutation_probability':0.01, \
-                       'elit_ratio': 0.01, \
-                       'crossover_probability': 0.9, \
-                       'parents_portion': 0.3, \
-                       'crossover_type':'uniform', \
-                       'max_iteration_without_improv':8}
-
-    ga_model=ga(function=obj, dimension=4,variable_type='real',variable_boundaries=bound, algorithm_parameters=algorithm_param)
-
-    # Run the genetic algorithm for the algorithm
-    ga_model.run()
-    return ga_model.output_dict
-
+def runPSO(obj, bounds):
+    bounds  = np.array(bounds)
+    lower_bounds = bounds[:,0].flatten()
+    upper_bounds = bounds[:,1].flatten()
+    x_opt, f_opt = pso(obj, lower_bounds, upper_bounds)
+    return x_opt, f_opt
 
 def pure(bounds):
     def pure_obj(X):
@@ -36,11 +26,7 @@ def pure(bounds):
         interpreter.invoke()
         results = interpreter.get_tensor(output_details[0]['index'])
         return -results
-    bounds  = np.array(bounds)
-    print(bounds)
-    dict = runGA(pure_obj, bounds)
-    protein = dict["function"]
-    values = dict["variable"]
+    values, protein = runPSO(pure_obj, bounds)
     protein = np.array([-protein])
     protein = protein.reshape(1,)
     pro = np.concatenate((values, protein))
@@ -62,9 +48,8 @@ def time(bounds):
         result = protein/time
         return -result
     bounds = np.array(bounds)
-    dict =  runGA(time_obj, bounds)
-    perTime = dict["function"]
-    values = dict["variable"]
+    values, perTime = runPSO(time_obj, bounds)
+
 
     # Predict protein
     values = np.array(values)
@@ -76,8 +61,9 @@ def time(bounds):
 
     perTime = np.array([-perTime])
     protein = np.array(protein)
-    protein = protein.reshape(perTime.shape)
-    print(protein)
+    protein = protein.reshape(1,)
+    perTime = perTime.reshape(1,)
+
     pro = np.concatenate((values, protein, perTime))
     formatted_list = [format(num, '.4f') for num in pro]
     return ','.join(map(str, formatted_list))
@@ -105,9 +91,7 @@ def cost(mgP, gluP, naP, working_cost, bounds):
         return -result
 
     bounds = np.array(bounds)
-    dict = runGA(cost_obj, bounds)
-    cost = dict["function"]
-    values = dict["variable"]
+    values, cost = runPSO(cost_obj, bounds)
 
     # Predict protein
     values = np.array(values)
@@ -119,11 +103,12 @@ def cost(mgP, gluP, naP, working_cost, bounds):
 
     cost = np.array([-cost])
     protein = np.array(protein)
+    cost = cost.reshape(1,)
     protein = protein.reshape(cost.shape)
-    print(protein)
     pro = np.concatenate((values, protein, cost))
     formatted_list = [format(num, '.4f') for num in pro]
     return ','.join(map(str, formatted_list))
+
 
 def profit(working_cost, mgP, gluP, naP,product_value, bounds):
     # Manipulation of inputs
@@ -151,9 +136,9 @@ def profit(working_cost, mgP, gluP, naP,product_value, bounds):
         selling = protein * product_value
         result = selling - price
         return -result
-    dict = runGA(prof_obj, bounds)
-    profit = dict["function"]
-    values = dict["variable"]
+
+    values, profit = runPSO(prof_obj, bounds)
+
     # Predict protein
     values = np.array(values)
     input_data = values.astype(np.float32)
@@ -164,13 +149,12 @@ def profit(working_cost, mgP, gluP, naP,product_value, bounds):
 
     profit = np.array([-profit])
     protein = np.array(protein)
+    profit = profit.reshape(1,)
     protein = protein.reshape(profit.shape)
     print(protein)
     pro = np.concatenate((values, protein, profit))
     formatted_list = [format(num, '.4f') for num in pro]
     return ','.join(map(str, formatted_list))
-
-
 
 def npy():
     # working_cost = float(str(working_cost))

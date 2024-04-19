@@ -1,4 +1,4 @@
-package com.example.optimizer
+package com.example.biooptimizer
 
 import android.os.Bundle
 import android.view.View
@@ -33,10 +33,25 @@ class ResultActivity : AppCompatActivity() {
         val optimizerType = intent.getStringExtra("optimizer")
 
 
+        var yieldValue = yield.toFloat()
+        yieldValue /= 100
+        val decimalFormat = DecimalFormat("#.####")
+        // Format the value using the DecimalFormat object
+        val formattedYield = decimalFormat.format(yieldValue)
+        yield = formattedYield.toString()
+
         if (receivedString != null) {
             when(optimizerType){
 
-                "time" -> resultText.text = "Protein per unit time: $resultValue"
+
+                "time" -> {
+                    var timeValue = resultValue.toFloat()
+                    timeValue /= 100
+                    // Format the value using the DecimalFormat object
+                    val formattedTime = decimalFormat.format(timeValue)
+                    var timePer = formattedTime.toString()
+                    resultText.text = "Protein per unit time: $timePer"
+                }
                 "cost" -> resultText.text = "Cost per unit protein: $resultValue"
                 "profit" -> resultText.text = "Profit: $resultValue"
             }
@@ -44,16 +59,8 @@ class ResultActivity : AppCompatActivity() {
             resultText.setVisibility(View.GONE)
         }
 
-        var yieldValue = yield.toFloat()
-        yieldValue /= 100
-        val decimalFormat = DecimalFormat("#.####")
-        // Format the value using the DecimalFormat object
-        val formattedValue = decimalFormat.format(yieldValue)
 
-
-        yield = formattedValue.toString()
-
-        yieldText.text = "Arrived yield : $yield mg/ml"
+        yieldText.text = "Estimated yield : $yield mg/ml"
         timeText.text = "Time : $time hours"
         gluText.text = "Glucose : $glu grams"
         mgText.text = "MgSO₄ : $mg grams"

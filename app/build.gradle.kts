@@ -12,7 +12,7 @@ chaquopy {
             install("geneticalgorithm")
             install("tflite-runtime")
             install("matplotlib")
-
+            install("pyswarm")
         }
     }
 }

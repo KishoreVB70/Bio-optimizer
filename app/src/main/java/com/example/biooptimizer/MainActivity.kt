@@ -9,11 +9,11 @@ import android.widget.Toast
 import com.chaquo.python.PyException
 import com.chaquo.python.Python
 import com.chaquo.python.android.AndroidPlatform
-import com.example.optimizer.CostActivity
-import com.example.optimizer.LimitActivity
-import com.example.optimizer.MasterActivity
-import com.example.optimizer.ProfitActivity
-import com.example.optimizer.ResultActivity
+import com.example.biooptimizer.CostActivity
+import com.example.biooptimizer.LimitActivity
+import com.example.biooptimizer.MasterActivity
+import com.example.biooptimizer.ProfitActivity
+import com.example.biooptimizer.ResultActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

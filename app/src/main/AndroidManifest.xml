@@ -21,11 +21,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.optimizer.LimitActivity"/>
-        <activity android:name="com.example.optimizer.ProfitActivity"/>
-        <activity android:name="com.example.optimizer.CostActivity"/>
-        <activity android:name="com.example.optimizer.ResultActivity"/>
-        <activity android:name="com.example.optimizer.MasterActivity"/>
+        <activity android:name="com.example.biooptimizer.LimitActivity"/>
+        <activity android:name="com.example.biooptimizer.ProfitActivity"/>
+        <activity android:name="com.example.biooptimizer.CostActivity"/>
+        <activity android:name="com.example.biooptimizer.ResultActivity"/>
+        <activity android:name="com.example.biooptimizer.MasterActivity"/>
 
     </application>
 
